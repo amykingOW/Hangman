@@ -5,3 +5,11 @@
   You will start the game with 9 lives.<br>
 </p>
 
+<ul>
+  <% @games.each do |game| %>
+    <li>
+      <%= link_to game.name, game %>
+    </li>
+  <% end %>
+</ul>
+
