@@ -6,8 +6,8 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get –skip-routes" do
-    get games_–skip-routes_url
+  test "should get -–skip-routes" do
+    get games_-–skip-routes_url
     assert_response :success
   end
 end
