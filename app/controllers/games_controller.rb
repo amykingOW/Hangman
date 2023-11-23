@@ -12,7 +12,9 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params)
+    #@game = Game.new(game_params)
+    game_creator = GameCreator.new(game_params)
+    @game = game_creator.call
 
     if @game.save
       redirect_to @game
@@ -31,5 +33,6 @@ class GamesController < ApplicationController
   private
     def game_params
       params.require(:game).permit(:name)
+      #params.require(:game).permit(:name, :random_word)
     end
 end

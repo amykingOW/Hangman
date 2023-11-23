@@ -1,6 +1,8 @@
 <h1><%= @game.name %></h1>
 
-<h2>Guess a letter</h2>
+<p>Here is the word so far <%= @game.random_word %> </p>
+
+<h3>Guess a letter</h3>
 <%= render "guesses/form" %>
 
 <h3>Letters already guessed</h3>
@@ -10,4 +12,8 @@
     <% end %>
   </div>
 
-  <%= button_to "Delete Game", game_path(@game), method: :delete, form: { data: {turbo_confirm: "Are you sure?"} } %>
+<div style= "padding-top: 10px; padding-bottom: 10px;">
+  <%= link_to "Back to saved games", root_path %>
+</div>
+
+<%= button_to "Delete Game", game_path(@game), method: :delete, form: { data: {turbo_confirm: "Are you sure?"} } %>
