@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_21_225914) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_23_022802) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "random_word"
   end
 
   create_table "guesses", force: :cascade do |t|
