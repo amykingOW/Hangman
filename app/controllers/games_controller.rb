@@ -12,13 +12,14 @@ class GamesController < ApplicationController
   end
 
   def create
-    #@game = Game.new(game_params)
-    game_creator = GameCreator.new(game_params)
-    @game = game_creator.call
+    @game = Game.new(game_params)
+    @game.update(random_word: Game.load_words.sample, status: "In progress")
 
     if @game.save
       redirect_to @game
     else
+      # https://medium.com/@traciemasek/validations-and-flash-in-rails-the-basics-1f2af5b2e61c
+      flash.now[:messages] = @game.errors.full_messages_for(:name)
       render :new, status: :unprocessable_entity
     end
   end
@@ -33,6 +34,5 @@ class GamesController < ApplicationController
   private
     def game_params
       params.require(:game).permit(:name)
-      #params.require(:game).permit(:name, :random_word)
     end
 end

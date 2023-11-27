@@ -1,12 +1,9 @@
-<%= form_with model: @game do |form| %>
-  <div style="margin-bottom: 10px;">
+<%= form_with model: game do |form| %>
+  <div style="padding-bottom: 10px;">
     <%= form.label :name %><br>
     <%= form.text_field :name %>
-    <% game.errors.full_messages_for(:name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
   </div>
-
+  
   <div>
     <%= form.submit %>
   </div>

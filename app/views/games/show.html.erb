@@ -1,16 +1,35 @@
 <h1><%= @game.name %></h1>
 
-<p>Here is the word so far <%= @game.random_word %> </p>
+<% if @game.status == "In progress" %>
+  <h3>Guess a letter</h3>
+  <p>
+    <% if flash[:messages] %>
+      <% flash[:messages].each do |message| %>
+        <p><strong><%= message %></strong></p>
+      <% end %>
+    <% end %>
+    Guess a single letter from a-z (case sensitive).<br>
+    Here is the word so far <%= Game.print_solved_so_far(@game) %>
+  </p>
+  <%= render "guesses/form" %>
 
-<h3>Guess a letter</h3>
-<%= render "guesses/form" %>
-
-<h3>Letters already guessed</h3>
+  <h3>Letters already guessed</h3>
   <div style="padding-bottom: 10px;">
     <% @game.guesses.each do |guess| %>
       <%= guess.letter %>
     <% end %>
   </div>
+
+<% else %>
+  <p>
+    <% if @game.status == "Won" %>
+      You won!
+    <% elsif @game.status == "Lost" %>
+      You used all your guesses and lost.
+    <% end %>
+    <br>The random word was "<%= @game.random_word.strip %>".
+  </p>
+<% end %>
 
 <div style= "padding-top: 10px; padding-bottom: 10px;">
   <%= link_to "Back to saved games", root_path %>
