@@ -1,6 +1,6 @@
 <h1><%= @game.name %></h1>
 
-<% if @game.status == "In progress" %>
+<% if @game.in_progress? %>
   <h3>Guess a letter</h3>
   <p>
     <% if flash[:messages] %>
@@ -9,7 +9,7 @@
       <% end %>
     <% end %>
     Guess a single letter from a-z (case sensitive).<br>
-    Here is the word so far <%= Game.print_solved_so_far(@game) %>
+    Here is the word so far <%= @game.print_solved_so_far(@game) %>
   </p>
   <%= render "guesses/form" %>
 
@@ -22,9 +22,9 @@
 
 <% else %>
   <p>
-    <% if @game.status == "Won" %>
+    <% if @game.won? %>
       You won!
-    <% elsif @game.status == "Lost" %>
+    <% elsif @game.lost? %>
       You used all your guesses and lost.
     <% end %>
     <br>The random word was "<%= @game.random_word.strip %>".

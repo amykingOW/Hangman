@@ -13,9 +13,8 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
-    @game.update(random_word: Game.load_words.sample, status: "In progress")
 
-    if @game.save
+    if @game.update(random_word: Game.load_words.sample, status: "In progress")
       redirect_to @game
     else
       # https://medium.com/@traciemasek/validations-and-flash-in-rails-the-basics-1f2af5b2e61c
@@ -32,7 +31,8 @@ class GamesController < ApplicationController
   end
 
   private
-    def game_params
-      params.require(:game).permit(:name)
-    end
+
+  def game_params
+    params.require(:game).permit(:name)
+  end
 end
