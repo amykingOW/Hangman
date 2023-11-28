@@ -1,0 +1,8 @@
+<p>
+  <% if @game.won? %>
+    You won!
+  <% elsif @game.lost? %>
+    You used all your guesses and lost.
+  <% end %>
+  <br>The random word was "<%= @game.random_word.strip %>".
+</p>

@@ -1,34 +1,9 @@
 <h1><%= @game.name %></h1>
 
 <% if @game.in_progress? %>
-  <h3>Guess a letter</h3>
-  <p>
-    <% if flash[:messages] %>
-      <% flash[:messages].each do |message| %>
-        <p><strong><%= message %></strong></p>
-      <% end %>
-    <% end %>
-    Guess a single letter from a-z (case sensitive).<br>
-    Here is the word so far <%= print_solved_so_far(@game) %>
-  </p>
-  <%= render "guesses/form" %>
-
-  <h3>Letters already guessed</h3>
-  <div style="padding-bottom: 10px;">
-    <% @game.guesses.each do |guess| %>
-      <%= guess.letter %>
-    <% end %>
-  </div>
-
+  <%= render "in_progress" %>
 <% else %>
-  <p>
-    <% if @game.won? %>
-      You won!
-    <% elsif @game.lost? %>
-      You used all your guesses and lost.
-    <% end %>
-    <br>The random word was "<%= @game.random_word.strip %>".
-  </p>
+  <%= render "won_lost" %>
 <% end %>
 
 <div style= "padding-top: 10px; padding-bottom: 10px;">
