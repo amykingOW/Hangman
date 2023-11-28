@@ -14,7 +14,7 @@ class Game < ApplicationRecord
     guesses.map { |guess| guess.letter }
   end
 
-  # If a letter in the random word has been guessed _ is replaced with the letter
+  # Returns random_word_array with correctly guessed letters and nil
   def build_solved_so_far
     random_word_array.map { |letter| guessed_letters.include?(letter) ? letter : nil }
   end
