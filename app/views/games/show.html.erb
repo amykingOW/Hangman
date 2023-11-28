@@ -9,7 +9,7 @@
       <% end %>
     <% end %>
     Guess a single letter from a-z (case sensitive).<br>
-    Here is the word so far <%= @game.print_solved_so_far(@game) %>
+    Here is the word so far <%= print_solved_so_far(@game) %>
   </p>
   <%= render "guesses/form" %>
 
