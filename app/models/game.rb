@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  MAX_GUESSES = 9
+  MAX_LIVES = 9
   IN_PROGRESS = "In progress"
 
   has_many :guesses, dependent: :destroy
@@ -24,9 +24,9 @@ class Game < ApplicationRecord
     random_word_array.all? { |letter| guessed_letters.include?(letter) }
   end
 
-  # Checks if the user lost and updates game status accordingly
+  # Returns true if user has made MAX_LIVES number of incorrect guesses
   def lost?
-    guesses.length >= Game::MAX_GUESSES
+    (guessed_letters - random_word_array.uniq).length >= Game::MAX_LIVES
   end
 
   def in_progress?
