@@ -9,15 +9,6 @@ class Game < ApplicationRecord
     File.readlines("words.txt")
   end
 
-  def check_guess
-    if won?
-      update!(status: "Won")
-      return
-    elsif lost?
-      update!(status: "Lost")
-    end
-  end
-
   # Puts all guessed letters in an array
   def guessed_letters
     guesses.map { |guess| guess.letter }
