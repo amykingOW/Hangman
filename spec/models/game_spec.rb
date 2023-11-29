@@ -6,9 +6,10 @@ describe Game do
   ABC_ARRAY = ["a", "b", "c"]
   DEFGHIJKL_ARRAY = ["d", "e", "f", "g", "h", "i", "j", "k", "l"]
   DEFGHIJ_ARRAY = ["d", "e", "f", "g", "h", "i", "j"]
+  GAME_NAME = "game1"
 
   def create_game(letters_guessed)
-    game = Game.new(name: "game1", random_word: RANDOM_WORD)
+    game = Game.new(name: GAME_NAME, random_word: RANDOM_WORD)
     game.guesses = create_guesses(letters_guessed)
     game
   end
@@ -17,10 +18,10 @@ describe Game do
     letters.map { |letter| Guess.new(letter: letter) }
   end
 
-  context "When create a new Game" do
+  context "When creating a new Game" do
     it "should have a name" do
       game = create_game([])
-      expect(game).to have_attributes(name: "game1")
+      expect(game).to have_attributes(name: GAME_NAME)
     end
   end
 
