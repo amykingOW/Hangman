@@ -39,4 +39,3 @@ class Game < ApplicationRecord
     random_word.strip.split("")
   end
 end
-
