@@ -24,12 +24,10 @@ describe Game do
       won = create_game("abc", ["a", "b", "c"]).won?
       expect(won).to eq true
     end
-  end
 
-  context "When no letters have been guessed correctly" do
-    it "won? should return false" do
-      won = create_game("abc", ["d", "e", "f"]).won?
-      expect(won).to eq false
+    it "in_progress? should return false" do
+      in_progress = create_game("abc", ["a", "b", "c"]).in_progress?
+      expect(in_progress).to eq false
     end
   end
 
@@ -38,12 +36,27 @@ describe Game do
       lost = create_game("abc", ["d", "e", "f", "g", "h", "i", "j", "k", "l"]).lost?
       expect(lost).to eq true
     end
+
+    it "in_progress? should return false" do
+      in_progress = create_game("abc", ["d", "e", "f", "g", "h", "i", "j", "k", "l"]).in_progress?
+      expect(in_progress).to eq false
+    end
   end
 
   context "When less than 9 letters have been guessed incorrectly" do
     it "lost? should return false" do
       lost = create_game("abc", ["d", "e", "f", "g", "h", "i", "j"]).lost?
       expect(lost).to eq false
+    end
+
+    it "won? should return false" do
+      won = create_game("abc", ["d", "e", "f", "g", "h", "i", "j"]).won?
+      expect(won).to eq false
+    end
+
+    it "in_progress? should return true" do
+      in_progress = create_game("abc", ["d", "e", "f", "g", "h", "i", "j"]).in_progress?
+      expect(in_progress).to eq true
     end
   end
 
