@@ -19,17 +19,31 @@ describe Game do
     end
   end
 
-  context "When all letters have been guessed" do
+  context "When all letters have been guessed correctly" do
     it "won? should return true" do
       won = create_game("abc", ["a", "b", "c"]).won?
       expect(won).to eq true
     end
   end
 
-  context "When no letters have been guessed" do
+  context "When no letters have been guessed correctly" do
     it "won? should return false" do
       won = create_game("abc", ["d", "e", "f"]).won?
       expect(won).to eq false
+    end
+  end
+
+  context "When 9 letters have been guessed incorrectly" do
+    it "lost? should return true" do
+      lost = create_game("abc", ["d", "e", "f", "g", "h", "i", "j", "k", "l"]).lost?
+      expect(lost).to eq true
+    end
+  end
+
+  context "When less than 9 letters have been guessed incorrectly" do
+    it "lost? should return false" do
+      lost = create_game("abc", ["d", "e", "f", "g", "h", "i", "j"]).lost?
+      expect(lost).to eq false
     end
   end
 
