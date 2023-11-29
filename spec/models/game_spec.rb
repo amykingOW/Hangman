@@ -30,6 +30,11 @@ describe Game do
       expect(won).to eq true
     end
 
+    it "lost? should return false" do
+      lost = create_game(ABC_ARRAY).lost?
+      expect(lost).to eq false
+    end
+
     it "in_progress? should return false" do
       in_progress = create_game(ABC_ARRAY).in_progress?
       expect(in_progress).to eq false
@@ -40,6 +45,11 @@ describe Game do
     it "lost? should return true" do
       lost = create_game(DEFGHIJKL_ARRAY).lost?
       expect(lost).to eq true
+    end
+
+    it "won? should return false" do
+      won = create_game(DEFGHIJKL_ARRAY).won?
+      expect(won).to eq false
     end
 
     it "in_progress? should return false" do
