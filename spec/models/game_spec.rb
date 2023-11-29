@@ -10,6 +10,12 @@ describe Game do
     letters.map { |letter| Guess.new(letter: letter) }
   end
 
+  def has_won?(random_word, letters_guessed)
+    game = create_game(random_word)
+    game.guesses = create_guesses(letters_guessed)
+    game.won?
+  end
+
   context "When create a new Game" do
     it "should have a name" do
       game = create_game("abc")
@@ -19,20 +25,14 @@ describe Game do
 
   context "When all letters have been guessed" do
     it "won? should return true" do
-      game = create_game("abc")
-      guesses = create_guesses(["a", "b", "c"])
-      game.guesses = guesses
-      won = game.won?
+      won = has_won?("abc", ["a", "b", "c"])
       expect(won).to eq true
     end
   end
 
   context "When no letters have been guessed" do
     it "won? should return false" do
-      game = create_game("abc")
-      guesses = create_guesses(["d", "e", "f"])
-      game.guesses = guesses
-      won = game.won?
+      won = has_won?("abc", ["d", "e", "f"])
       expect(won).to eq false
     end
   end
