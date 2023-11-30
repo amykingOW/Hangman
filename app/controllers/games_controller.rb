@@ -12,6 +12,7 @@ class GamesController < ApplicationController
   end
 
   def create
+    #binding.b
     @game = Game.new(game_params)
 
     if @game.update(random_word: Game.load_words.sample)

@@ -1,7 +1,6 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
-#require 'spec_helper'
-require '/Users/amyking/Documents/hangman/spec/spec_helper.rb'
 ENV['RAILS_ENV'] ||= 'test'
+# This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'spec_helper'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?

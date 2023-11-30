@@ -1,85 +1,89 @@
-require '/Users/amyking/Documents/hangman/spec/rails_helper.rb'
-require '/Users/amyking/Documents/hangman/app/models/game.rb'
+require 'rails_helper'
 
 describe Game do
-  RANDOM_WORD = "abc"
-  ABC_ARRAY = ["a", "b", "c"]
-  DEFGHIJKL_ARRAY = ["d", "e", "f", "g", "h", "i", "j", "k", "l"]
-  DEFGHIJ_ARRAY = ["d", "e", "f", "g", "h", "i", "j"]
-  GAME_NAME = "game1"
-
-  def create_game(letters_guessed)
-    game = Game.new(name: GAME_NAME, random_word: RANDOM_WORD)
-    game.guesses = create_guesses(letters_guessed)
+  let(:letters) { ["a", "b", "c"] }
+  let(:game_name) { "game1" }
+  let(:game) do
+    game = Game.new(name: game_name, random_word: "abc")
+    game.guesses = letters.map { |letter| Guess.new(letter: letter) }
     game
   end
 
-  def create_guesses(letters)
-    letters.map { |letter| Guess.new(letter: letter) }
-  end
-
   context "When creating a new Game" do
+    let(:letters) { [] }
+
     it "should have a name" do
-      game = create_game([])
-      expect(game).to have_attributes(name: GAME_NAME)
+      expect(game.name).to eq game_name
     end
   end
 
   context "When all letters have been guessed correctly" do
-    let!(:game) { create_game(ABC_ARRAY) }
-
     it "won? should return true" do
-      won = game.won?
-      expect(won).to eq true
+      expect(game).to be_won
     end
 
     it "lost? should return false" do
-      lost = game.lost?
-      expect(lost).to eq false
+      expect(game).to_not be_lost
     end
 
     it "in_progress? should return false" do
-      in_progress = game.in_progress?
-      expect(in_progress).to eq false
+      expect(game).to_not be_in_progress
     end
   end
 
   context "When 9 letters have been guessed incorrectly" do
-    let!(:game) { create_game(DEFGHIJKL_ARRAY) }
+    let(:letters) { ["d", "e", "f", "g", "h", "i", "j", "k", "l"] }
 
     it "lost? should return true" do
-      lost = game.lost?
-      expect(lost).to eq true
+      expect(game).to be_lost
     end
 
     it "won? should return false" do
-      won = game.won?
-      expect(won).to eq false
+      expect(game).to_not be_won
     end
 
     it "in_progress? should return false" do
-      in_progress = game.in_progress?
-      expect(in_progress).to eq false
+      expect(game).to_not be_in_progress
     end
   end
 
   context "When less than 9 letters have been guessed incorrectly" do
-    let!(:game) { create_game(DEFGHIJ_ARRAY) }
+    let(:letters) { ["d", "e", "f", "g", "h", "i", "j"] }
 
+    it "in_progress? should return true" do
+      expect(game).to be_in_progress
+    end
+    
     it "lost? should return false" do
-      lost = game.lost?
-      expect(lost).to eq false
+      expect(game).to_not be_lost
     end
 
     it "won? should return false" do
-      won = game.won?
-      expect(won).to eq false
-    end
-
-    it "in_progress? should return true" do
-      in_progress = game.in_progress?
-      expect(in_progress).to eq true
+      expect(game).to_not be_won
     end
   end
 
+  describe "#guessed_letters" do
+    context "no guesses have been made" do
+      let(:letters) { [] }
+
+      it "should return an empty array" do
+        expect(game.guessed_letters).to eq []
+      end
+    end
+
+    context "guesses have been made" do
+      it "should return an array with the guessed letters" do
+        expect(game.guessed_letters).to eq letters
+      end
+    end
+  end
+
+  describe "#build_solved_so_far" do
+    let(:letters) { ["a", "b"] }
+    
+    it "returns correct array" do
+      expect(game.build_solved_so_far).to eq ["a", "b", nil]
+    end
+  end
 end
