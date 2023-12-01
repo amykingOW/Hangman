@@ -12,13 +12,11 @@ class GamesController < ApplicationController
   end
 
   def create
-    #binding.b
     @game = Game.new(game_params)
 
     if @game.update(random_word: Game.load_words.sample)
       redirect_to @game
     else
-      # https://medium.com/@traciemasek/validations-and-flash-in-rails-the-basics-1f2af5b2e61c
       flash.now[:messages] = @game.errors.full_messages_for(:name)
       render :new, status: :unprocessable_entity
     end
