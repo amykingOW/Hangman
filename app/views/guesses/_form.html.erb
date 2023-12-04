@@ -1,0 +1,10 @@
+<%= form_with model: [ @game, @game.guesses.build ] do |form| %>
+  <p>
+    <%= form.label :letter %><br>
+    <%= form.text_field :letter %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

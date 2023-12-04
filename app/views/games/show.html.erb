@@ -1,0 +1,13 @@
+<h1><%= @game.name %></h1>
+
+<% if @game.in_progress? %>
+  <%= render "in_progress" %>
+<% else %>
+  <%= render "won_lost" %>
+<% end %>
+
+<div style= "padding-top: 10px; padding-bottom: 10px;">
+  <%= link_to "Back to saved games", root_path %>
+</div>
+
+<%= button_to "Delete Game", game_path(@game), method: :delete, form: { data: {turbo_confirm: "Are you sure?"} } %>

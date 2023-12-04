@@ -1,0 +1,18 @@
+<h1>Welcome to Hangman!</h1>
+<p>
+  Guess a random word from the English language by guessing one letter at a time.<br>
+  If the letter you guess is not in the word then you will lose a life.<br>
+  You will get a maximum of <%= Game::MAX_LIVES %> lives.<br>
+</p>
+
+<h2>Saved Games</h2>
+
+<ul>
+  <% @games.each do |game| %>
+    <li>
+      <%= link_to game.name, game %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Start New Game", new_game_path %>
