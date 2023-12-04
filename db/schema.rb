@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema[7.1].define(version: 2023_11_28_031040) do
   create_table "games", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "random_word"
   end
 
   create_table "guesses", force: :cascade do |t|
-    t.string "letter"
+    t.string "letter", null: false
     t.integer "game_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
