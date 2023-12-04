@@ -1,6 +1,5 @@
 class Game < ApplicationRecord
   MAX_LIVES = 9
-  IN_PROGRESS = "In progress"
 
   has_many :guesses, dependent: :destroy
   validates :name, presence: true
