@@ -12,4 +12,4 @@ Welcome to the Hangman game built using Ruby on Rails! This classic word-guessin
 8. You can delete the game or go back to saved games to start a new game
 
 ## Running Tests
-Tests files for models and requests are included in the spec folder. Model tests can be executed by running `bundle exec rspec spec/models`. Request tests can be executed by running `bundle exec rspec spec/requests`.
+Tests files for models and requests are included in the spec folder. Ensure rspec is installed on you machine. Model tests can be executed by running `bundle exec rspec spec/models`. Request tests can be executed by running `bundle exec rspec spec/requests`.
